@@ -27,11 +27,15 @@ def serialize_hero(hero):
         "hero_powers": [serialize_hero_power(hp) for hp in hero.hero_powers]
     }
 
+# Updated /heroes route
 @api.route('/heroes', methods=['GET'])
 def get_heroes():
     heroes = Hero.query.all()
-    return jsonify([serialize_hero(hero) for hero in heroes]), 200
+    return jsonify([
+        {"id": hero.id, "name": hero.name, "super_name": hero.super_name} for hero in heroes
+    ]), 200
 
+# Existing /heroes/<int:id> route for detailed view
 @api.route('/heroes/<int:id>', methods=['GET'])
 def get_hero(id):
     hero = Hero.query.options(joinedload(Hero.hero_powers).joinedload(HeroPower.power)).get(id)
