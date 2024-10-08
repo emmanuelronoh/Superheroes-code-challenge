@@ -27,7 +27,7 @@ def serialize_hero(hero):
         "hero_powers": [serialize_hero_power(hp) for hp in hero.hero_powers]
     }
 
-# Updated /heroes route
+
 @api.route('/heroes', methods=['GET'])
 def get_heroes():
     heroes = Hero.query.all()
@@ -35,7 +35,7 @@ def get_heroes():
         {"id": hero.id, "name": hero.name, "super_name": hero.super_name} for hero in heroes
     ]), 200
 
-# Existing /heroes/<int:id> route for detailed view
+
 @api.route('/heroes/<int:id>', methods=['GET'])
 def get_hero(id):
     hero = Hero.query.options(joinedload(Hero.hero_powers).joinedload(HeroPower.power)).get(id)
@@ -82,7 +82,7 @@ def create_hero_power():
     if data['strength'] not in ['Strong', 'Weak', 'Average']:
         return jsonify({"errors": ["Strength must be 'Strong', 'Weak', or 'Average'"]}), 422
 
-    # Check if hero and power exist
+
     hero = Hero.query.get(data['hero_id'])
     power = Power.query.get(data['power_id'])
     if not hero:

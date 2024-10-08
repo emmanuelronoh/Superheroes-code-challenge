@@ -8,7 +8,7 @@ class Hero(db.Model):
     name = db.Column(db.String, nullable=False)
     super_name = db.Column(db.String, nullable=False)
     
-    # Relationship to HeroPower
+
     hero_powers = db.relationship('HeroPower', back_populates='hero', cascade='all, delete-orphan')
 
 class Power(db.Model):
@@ -18,7 +18,7 @@ class Power(db.Model):
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
 
-    # Relationship to HeroPower
+
     hero_powers = db.relationship('HeroPower', back_populates='power', cascade='all, delete-orphan')
 
     @validates('description')
@@ -35,7 +35,7 @@ class HeroPower(db.Model):
     hero_id = db.Column(db.Integer, db.ForeignKey('heroes.id'), nullable=False)
     power_id = db.Column(db.Integer, db.ForeignKey('powers.id'), nullable=False)
 
-    # Relationships back to Hero and Power
+
     hero = db.relationship('Hero', back_populates='hero_powers')
     power = db.relationship('Power', back_populates='hero_powers')
 

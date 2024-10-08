@@ -30,24 +30,23 @@ def seed_database():
         db.drop_all()  
         db.create_all()
 
-        # Insert heroes
+        
         for hero in heroes_data:
             new_hero = Hero(**hero)
             db.session.add(new_hero)
         
-        # Insert powers
+        
         for power in powers_data:
             new_power = Power(**power)
             db.session.add(new_power)
 
-        db.session.commit()  # Commit to save heroes and powers
+        db.session.commit()  
 
-        # Insert hero powers
         for hero_power in hero_powers_data:
             new_hero_power = HeroPower(**hero_power)
             db.session.add(new_hero_power)
 
-        db.session.commit()  # Commit to save hero powers
+        db.session.commit() 
 
         print("Database seeded!")
 

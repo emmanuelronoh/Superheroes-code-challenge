@@ -30,7 +30,7 @@ class HeroPowerSchema:
             'strength': self.strength,
             'hero_id': self.hero_id,
             'power_id': self.power_id,
-            'power': self.power.serialize()  # Serialize the power
+            'power': self.power.serialize()  
         }
 
     @classmethod
